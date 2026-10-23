@@ -1,0 +1,22 @@
+{
+  "project_name": "Education Literature Review",
+  "year_from": 2021,
+  "year_to": 2026,
+  "max_results_per_topic_journal": 15,
+  "max_total_records": 250,
+  "download_open_access_pdfs": true,
+  "max_pdf_downloads": 40,
+  "verify_doi_with_crossref": true,
+  "request_delay_seconds": 0.35,
+  "request_timeout_seconds": 22,
+  "max_pdf_size_mb": 25,
+  "search_keywords": [
+    "student engagement",
+    "teacher professional development",
+    "educational technology"
+  ],
+  "notes": "严格筛选：正式结果仅保留匿名访问后实际返回 PDF 文件头的 HTTPS 免费下载链接。OpenAlex 搜索全版本；若设置 SCHOLAR_EMAIL 可使用 Unpaywall DOI 补充。失败候选记录于 needs_manual_access.csv，不进入正式导出。",
+  "require_verified_free_pdf": true,
+  "use_unpaywall_fallback": true,
+  "max_pdf_candidates_per_record": 15
+}

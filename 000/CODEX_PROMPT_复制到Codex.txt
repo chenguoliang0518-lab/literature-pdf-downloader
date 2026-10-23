@@ -1,0 +1,14 @@
+请对这个 GitHub 仓库执行「教育学顶级期刊文献检索 + 免费 PDF 直链严格验证」。
+
+【唯一重要的正式纳入条件】检索结果必须具有无需付费、无需学校/个人账号登录的直接 HTTPS PDF 下载链接，而且需要实际发起匿名 HTTP 请求检查响应为 PDF 文件头（%PDF-）。没有成功确认的，不能进入正式文献清单，也不能进入 Zotero 的 RIS/BibTeX 正式输出。只有摘要页、WoS/Scopus 收录、DOI、Open Access 标记或登录后可下载，不符合要求。
+
+步骤：
+1. 阅读 README_中文.md、AGENTS.md、config/settings.json、config/journals.csv；执行 python run.py --check 及 python -m unittest discover -s tests -v。不要私自更改我配置的关键词、期刊和年份，默认示例词要明确告知是演示主题。
+2. 检查 Cloud 环境的网络权限。OpenAlex 与 Crossref 需要联网，若我配置了 SCHOLAR_EMAIL，可使用 Unpaywall 的 DOI 接口；高校知识库和出版社实际 PDF 域名也需允许。网络阻挡时明确反馈，不伪造检索与下载成功。
+3. 先运行 python run.py --mode search --no-pdf 检索并验证免费的 PDF 直链；它仍会测试 PDF 响应，但不保存文件。查看 output/search_log.csv 的期刊未匹配、API 失败、异常结果。
+4. 重点搜索每篇论文的多个合法开放来源，包括出版社公开版、各大学机构知识库、作者接受稿和公开主题仓库。不要只检查 best_oa_location 的一个位置；必要时使用可选 Unpaywall DOI 兜底。不得随意猜测或拼接 PDF 链接。
+5. 输出严格清单 output/verified_free_pdf_results.csv，逐篇至少包含 Title、Authors、Year、Journal、DOI、核验后免费 PDF 链接 verified_pdf_url、下载来源 pdf_source、来源类型、PDF 版本、核验时间 pdf_link_checked_at_utc；此外生成 RIS、BibTeX，以及失败候选审计表。
+6. 如果我上传了从 Scopus 或 Web of Science 正式导出的 DOI CSV/TSV/RIS，则改用 python run.py --mode doi --input input/实际文件名 对这批记录寻找开放下载版本。不得声称本程序直接登录或调用 WoS/Scopus 的订阅数据库。
+7. 在确实能够访问公网 OA 主机时，可运行 python run.py --mode search 下载公开 PDF；如 Cloud 下载受阻，不要冒称下载成功，建议在 Windows 本地运行 run_windows.bat。PDF 不必提交 GitHub 仓库。
+
+最终报告：分别统计候选总量、正式有“已验证免费下载直链”的文献数量、成功完整下载的 PDF 数、人工复核/因无法免费获取而排除数量，指出检索覆盖范围和局限。正式清单中任何 verified_pdf_url 为空的记录，均视为工作失败；请先修正或剔除。禁止绕过登录、验证码、付费墙或版权许可。
